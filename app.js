@@ -8,9 +8,14 @@ const app = express();
 app.use(bodyParser.json());
 console.log('App started!');
 
-let mongoHost = '35.174.100.96';
-let mongoPort = 27017;
-let dbName = 'mydb';
+let mongoHost = process.env.MONGO_HOST;
+let mongoPort = process.env.MONGO_PORT;
+let dbName = process.env.MONGO_DB_NAME;
+
+if (!mongoHost) {
+    mongoHost = '127.0.0.1'
+    console.log('MONGO_HOST not specified, using default mongoHost 127.0.0.1');
+}
 
 let url = `mongodb://${mongoHost}:${mongoPort}`;
 let db;
@@ -33,7 +38,8 @@ app.get('/', (req, res) => {
 
 app.get('/users', (req, res) => {
     console.log(`Received a GET request on ${req.path} from ${req.hostname}`);
-    let allUsers = [];
+
+    let allUsers = db.users;
     res.send(allUsers);
     console.log(`Response sent for GET ${req.path} to ${req.hostname}`);
 });
