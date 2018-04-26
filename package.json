@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/sanketjpatel/sample-nodejs-12fa#readme",
   "dependencies": {
+    "body-parser": "1.18.2",
     "express": "4.16.3",
+    "log-timestamp": "0.1.2",
     "npm": "^6.0.0"
   },
   "devDependencies": {}
