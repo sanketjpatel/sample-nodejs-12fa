@@ -12,11 +12,12 @@ let mongoHost = '35.174.100.96';
 let mongoPort = 27017;
 let dbName = 'mydb';
 
-let url = `mongodb://${mongoHost}:${mongoPort}/${dbName}`;
-mongoClient.connect(url, (err, db) => {
+let url = `mongodb://${mongoHost}:${mongoPort}`;
+let db;
+mongoClient.connect(url, (err, client) => {
     if (err) throw err;
+    db = client.db(dbName);
     console.log("Database connected");
-    db.close();
 });
 
 function getRootResponse(req) {
