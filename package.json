@@ -1,0 +1,32 @@
+{
+  "name": "deep-dive-12fa",
+  "version": "1.0.0",
+  "description": "Sample 12 factor application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sanketjpatel/sample-nodejs-12fa.git"
+  },
+  "keywords": [
+    "12",
+    "factor",
+    "docker",
+    "nodejs",
+    "sample"
+  ],
+  "author": "Sanket Patel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sanketjpatel/sample-nodejs-12fa/issues"
+  },
+  "homepage": "https://github.com/sanketjpatel/sample-nodejs-12fa#readme",
+  "dependencies": {
+    "express": "4.16.3",
+    "npm": "^6.0.0"
+  },
+  "devDependencies": {}
+}
