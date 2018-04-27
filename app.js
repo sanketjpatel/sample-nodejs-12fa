@@ -1,3 +1,4 @@
+const sleep = require('sleep');
 require('log-timestamp');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -19,11 +20,22 @@ if (!mongoHost) {
 
 let url = `mongodb://${mongoHost}:${mongoPort}`;
 let db;
-mongoClient.connect(url, (err, client) => {
-    if (err) throw err;
-    db = client.db(dbName);
-    console.log("Database connected");
-});
+
+let maxAttempts = 20;
+let isConnected = false;
+for (let attempt = 1; attempt <= maxAttempts && !isConnected; attempt++) {
+    mongoClient.connect(url, (err, client) => {
+        if (err) {
+            console.log('Unable to connect to the database, retrying');
+        } else {
+            db = client.db(dbName);
+            console.log("Database connected");
+            isConnected = true;
+            return;
+        }
+    });
+    sleep.sleep(attempt);
+}
 
 function getRootResponse(req) {
     return ' <h1>Hello World!</h1><p>This is a simple response to a <b>GET</b> request on the base path</p>\n';
